@@ -1,5 +1,11 @@
+import 'package:donut_app_8sc/tabs/burger_tab.dart';
+import 'package:donut_app_8sc/tabs/pancakes_tab.dart';
+import 'package:donut_app_8sc/tabs/donut_tab.dart';
+import 'package:donut_app_8sc/tabs/pizza_tab.dart';
+import 'package:donut_app_8sc/tabs/smoothie_tab.dart';
 import 'package:donut_app_8sc/utils/my_tab.dart';
 import 'package:flutter/material.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -45,8 +51,18 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             //Tab Bar para un menu de elementos
-            TabBar(tabs: myTabs)
+            TabBar(tabs: myTabs),
             //Tab Bar view
+            Expanded(child:
+            TabBarView(
+              children: [
+              DonutTab(),
+              BurgerTab(),
+              SmoothieTab(),
+              PancakesTab(),
+              PizzaTab(),
+              ]
+              )),
       
             //carrito
           ],
