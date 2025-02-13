@@ -1,3 +1,4 @@
+import 'package:donut_app_8sc/utils/donut_tile.dart';
 import 'package:flutter/material.dart';
 
 class DonutTab extends StatelessWidget {
@@ -22,7 +23,7 @@ class DonutTab extends StatelessWidget {
         crossAxisCount: 2),
         //que elementos tendrá
       itemBuilder: (context, index){
-        return DonutTitle (
+        return DonutTile (
           donutFlavor: donutsOnSale[index][0],
           donutPrice : donutsOnSale[index][1],
           donutColor: donutsOnSale[index][2],
