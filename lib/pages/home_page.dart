@@ -18,15 +18,15 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> myTabs = [
     //donut tab
-    const MyTab(iconPath: 'lib/icons/donut.png'),
+    const MyTab(iconPath: 'lib/icons/donut.png', tabName: 'Donuts'),
     //burger tab
-     const MyTab(iconPath: 'lib/icons/burger.png'),
+     const MyTab(iconPath: 'lib/icons/burger.png', tabName: 'Burger'),
     //smoothie tab
-     const MyTab(iconPath: 'lib/icons/smoothie.png'),
+     const MyTab(iconPath: 'lib/icons/smoothie.png', tabName: 'Smoothie'),
     //pancakes tab
-     const MyTab(iconPath: 'lib/icons/pancakes.png'),
+     const MyTab(iconPath: 'lib/icons/pancakes.png', tabName: 'Pancakes'),
     //pizza tab
-     const MyTab(iconPath: 'lib/icons/pizza.png'),
+     const MyTab(iconPath: 'lib/icons/pizza.png', tabName: 'Pizza'),
   ]; //lista de tipo widget
 
   @override
@@ -51,7 +51,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             //Tab Bar para un menu de elementos
-            TabBar(tabs: myTabs),
+            TabBar(tabs: myTabs,
+            labelColor: Colors.pink,
+            unselectedLabelColor: Colors.grey,), //color del texto seleccionado
             //Tab Bar view
             Expanded(child:
             TabBarView(
@@ -65,6 +67,38 @@ class _HomePageState extends State<HomePage> {
               )),
       
             //carrito
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(16),
+              child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Padding(padding: EdgeInsets.only(left: 28),
+                child: Column (
+                  //Alineado a la izquierda
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("2 Items | \$45",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                    Text('Delivery Charges Included',
+                    style: TextStyle(fontSize: 12),)
+                  ],
+                ),),
+                ElevatedButton(onPressed: (){},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.pink
+                ),
+                 child: const Text("View Cart",
+                 style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                 ),))
+              ],
+              ),
+            )
           ],
         ),
       ),

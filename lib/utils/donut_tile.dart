@@ -66,7 +66,7 @@ class DonutTile extends StatelessWidget {
               child: Text(
                 donutFlavor,
                 style: TextStyle(
-                  fontSize: 14, // Reducido de 16 a 14
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: donutColor[800],
                 ),
@@ -87,8 +87,8 @@ class DonutTile extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     icon: const Icon(
                       Icons.favorite_border,
-                      color: Colors.grey,
-                      size: 20, // Reducido el tamaño del ícono
+                      color: Colors.pink,
+                      size: 20,
                     ),
                     onPressed: () {},
                   ),
@@ -109,7 +109,7 @@ class DonutTile extends StatelessWidget {
                         'Add',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 12, // Reducido el tamaño de la fuente
+                          fontSize: 12,
                         ),
                     ),
                   ),

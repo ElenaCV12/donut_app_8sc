@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BurgerTab extends StatelessWidget {
+  
   const BurgerTab({super.key});
 
   @override
