@@ -8,7 +8,11 @@ class DonutTab extends StatelessWidget {
     ["Ice Cream", "36", Colors.blue, "lib/images/icecream_donut.png"],
     ["Strawberry", "45", Colors.red, "lib/images/strawberry_donut.png"],
     ["Grape Ape", "84", Colors.purple, "lib/images/grape_donut.png"],
-    ["Chocolate", "95", Colors.brown, "lib/images/chocolate_donut.png"]
+    ["Chocolate", "95", Colors.brown, "lib/images/chocolate_donut.png"],
+    ["Menta", "55", Colors.blue, "lib/images/donut_menta.png"],
+    ["Pistacho", "50", Colors.red, "lib/images/donut_pistacho.png"],
+    ["Mapple", "60", Colors.purple, "lib/images/donut_mapple.png"],
+    ["Red Velvet", "70", Colors.brown, "lib/images/donut_redvelvet.png"],
   ];
 
   DonutTab({super.key});
