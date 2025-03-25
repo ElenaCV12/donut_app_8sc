@@ -1,24 +1,30 @@
 import 'package:donut_app_8sc/pages/home_page.dart';
+import 'package:donut_app_8sc/tabs/donut_tab.dart'; // Import the DonutTab
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Import provider package
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    // Wrap the app with ChangeNotifierProvider
+    ChangeNotifierProvider(
+      create: (context) => DonutTab(), // Create an instance of DonutTab
+      child: const MyApp(), // Your existing MyApp
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Donut Shop',
       theme: ThemeData(
-        //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         tabBarTheme: const TabBarTheme(
-          indicatorColor: Colors.pink, //cambia el indicador de los tabs
+          indicatorColor: Colors.pink,
         ),
       ),
       home: const HomePage(),

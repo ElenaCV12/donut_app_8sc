@@ -8,8 +8,9 @@ class DonutTile extends StatelessWidget {
 
   //valor fijo del borde circular
   final double borderRadius = 24;
+  final void Function()? onPressed;
 
-  const DonutTile({super.key, required this.donutFlavor, required this.donutPrice, this.donutColor, required this.imageName});
+  const DonutTile({super.key, required this.donutFlavor, required this.donutPrice, this.donutColor, required this.imageName, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +105,7 @@ class DonutTile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(borderRadius/2),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: onPressed,
                       child: const Text(
                         'Add',
                         style: TextStyle(

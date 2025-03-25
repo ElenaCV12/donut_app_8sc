@@ -1,9 +1,10 @@
-import 'package:donut_app_8sc/utils/donut_tile.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:donut_app_8sc/utils/donut_tile.dart';
 
-class DonutTab extends StatelessWidget {
-  //lista de donas
-  final List donutsOnSale = [
+class DonutTab extends ChangeNotifier {
+  // List of donuts on sale
+  final List _donutsOnSale = [
     //[donutFlavor, donutPrice, donutColor, imageName]
     ["Ice Cream", "36", Colors.blue, "lib/images/icecream_donut.png"],
     ["Strawberry", "45", Colors.red, "lib/images/strawberry_donut.png"],
@@ -15,26 +16,53 @@ class DonutTab extends StatelessWidget {
     ["Red Velvet", "70", Colors.brown, "lib/images/donut_redvelvet.png"],
   ];
 
-  DonutTab({super.key});
+  // List of cart items
+  final List _cartItems = [];
 
-  @override
-  Widget build(BuildContext context) {
-    return  
-    GridView.builder(
-      //Como se va a distribuir
-      gridDelegate: 
-      const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, childAspectRatio: 1/1.5),
-        //que elementos tendrá
-      itemBuilder: (context, index){
-        return DonutTile (
-          donutFlavor: donutsOnSale[index][0],
-          donutPrice : donutsOnSale[index][1],
-          donutColor: donutsOnSale[index][2],
-          imageName: donutsOnSale[index][3]
+  // Getters
+  List get donutsOnSale => _donutsOnSale;
+  List get cartItems => _cartItems;
+
+  // Add item to cart
+  void addItemToCart(int index) {
+    _cartItems.add(_donutsOnSale[index]);
+    notifyListeners(); // Important to update UI
+  }
+
+  // Remove item from cart
+  void removeItemFromCart(int index) {
+    _cartItems.removeAt(index);
+    notifyListeners(); // Important to update UI
+  }
+
+  // Calculate total price
+  String calculateTotal() {
+    double totalPrice = 0;
+    for (int i = 0; i < _cartItems.length; i++) {
+      totalPrice += double.parse(_cartItems[i][1]);
+    }
+    return totalPrice.toStringAsFixed(2);
+  }
+
+  // Build method for GridView of donuts
+  Widget buildDonutGrid() {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2, 
+        childAspectRatio: 1/1.5
+      ),
+      itemBuilder: (context, index) {
+        return DonutTile(
+          donutFlavor: _donutsOnSale[index][0],
+          donutPrice: _donutsOnSale[index][1],
+          donutColor: _donutsOnSale[index][2],
+          imageName: _donutsOnSale[index][3],
+          onPressed: () {
+            addItemToCart(index);
+          },
         );
-      }, // número de items que se mostrarán
-      itemCount: donutsOnSale.length,
-      ); // el gridDelgate, es como va organizado todo
+      },
+      itemCount: _donutsOnSale.length,
+    );
   }
 }
