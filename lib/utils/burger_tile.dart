@@ -5,11 +5,12 @@ class BurgerTile extends StatelessWidget {
   final String burgerPrice;
   final dynamic burgerColor;
   final String imageName;
+  final void Function()? onPressed;
 
   //valor fijo del borde circular
   final double borderRadius = 24;
 
-  const BurgerTile({super.key, required this.burgerFlavor, required this.burgerPrice, this.burgerColor, required this.imageName});
+  const BurgerTile({super.key, required this.burgerFlavor, required this.burgerPrice, this.burgerColor, required this.imageName, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +105,7 @@ class BurgerTile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(borderRadius/2),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: onPressed,
                       child: const Text(
                         'Add',
                         style: TextStyle(

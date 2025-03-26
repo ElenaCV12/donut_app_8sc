@@ -1,10 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:donut_app_8sc/utils/smoothie_tile.dart';
 import 'package:flutter/material.dart';
 
-class SmoothieTab extends StatelessWidget {
+class SmoothieTab extends ChangeNotifier {
 
     //lista de smoothies
-  final List smoothiesOnSale = [
+  final List _smoothiesOnSale = [
     //[smoothieFlavor, smoothiePrice, smoothieColor, imageName]
     ["Fresa", "75", Colors.blue, "lib/images/smoothhie/smoothie_fresa.png"],
     ["Naranja", "70", Colors.red, "lib/images/smoothhie/smoothie_naranja.png"],
@@ -16,12 +17,37 @@ class SmoothieTab extends StatelessWidget {
     ["Aguacate", "80", Colors.brown, "lib/images/smoothhie/smoothie_aguacate.png"],
   ];
 
-  SmoothieTab({super.key});
+  //list of cart items
+  final List _cartItems = [];
 
-  @override
-  Widget build(BuildContext context) {
-    return  
-    GridView.builder(
+  List get smoothiesOnSale => _smoothiesOnSale;
+  List get cartItems => _cartItems;
+
+    // Add item to cart
+  void addItemToCart(int index) {
+    _cartItems.add(_smoothiesOnSale[index]);
+    notifyListeners();
+  }
+
+    // Remove item from cart
+  void removeItemFromCart(int index) {
+    _cartItems.removeAt(index);
+    notifyListeners();
+  }
+
+  // Calculate total price
+  double calculateTotal() {
+  double totalPrice = 0;
+  for (int i = 0; i < _cartItems.length; i++) {
+    totalPrice += double.parse(_cartItems[i][1]);
+  }
+  return totalPrice;
+}
+
+
+
+  Widget buildSmoothieGrid() {
+    return  GridView.builder(
       //Como se va a distribuir
       gridDelegate: 
       const SliverGridDelegateWithFixedCrossAxisCount(
@@ -32,7 +58,10 @@ class SmoothieTab extends StatelessWidget {
           smoothieFlavor: smoothiesOnSale[index][0],
           smoothiePrice : smoothiesOnSale[index][1],
           smoothieColor: smoothiesOnSale[index][2],
-          imageName: smoothiesOnSale[index][3]
+          imageName: smoothiesOnSale[index][3],
+          onPressed: () {
+            addItemToCart(index);
+          },
         );
       }, // número de items que se mostrarán
       itemCount: smoothiesOnSale.length,

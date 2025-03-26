@@ -1,9 +1,10 @@
-import 'package:donut_app_8sc/utils/burger_tile.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:donut_app_8sc/utils/burger_tile.dart';
 
-class BurgerTab extends StatelessWidget {
-    //lista de hamburguesas
-  final List burgersOnSale = [
+class BurgerTab extends ChangeNotifier {
+  // List of burgers on sale
+  final List _burgersOnSale = [
     //[burgerFlavor, burgerPrice, burgerColor, imageName]
     ["Burger Uno", "100", Colors.blue, "lib/images/burger/burger_uno.png"],
     ["Burger Dos", "105", Colors.red, "lib/images/burger/burger_dos.png"],
@@ -15,27 +16,53 @@ class BurgerTab extends StatelessWidget {
     ["Burger Combo3", "150", Colors.brown, "lib/images/burger/burguer_combooo.png"],
   ];
 
+  // List of cart items
+  final List _cartItems = [];
 
-  BurgerTab({super.key});
+  // Getters
+  List get burgersOnSale => _burgersOnSale;
+  List get cartItems => _cartItems;
 
-  @override
-  Widget build(BuildContext context) {
-    return  
-    GridView.builder(
-      //Como se va a distribuir
-      gridDelegate: 
-      const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, childAspectRatio: 1/1.5),
-        //que elementos tendrá
-      itemBuilder: (context, index){
-        return BurgerTile (
-          burgerFlavor: burgersOnSale[index][0],
-          burgerPrice : burgersOnSale[index][1],
-          burgerColor: burgersOnSale[index][2],
-          imageName: burgersOnSale[index][3]
+  // Add item to cart
+  void addItemToCart(int index) {
+    _cartItems.add(_burgersOnSale[index]);
+    notifyListeners();
+  }
+
+  // Remove item from cart
+  void removeItemFromCart(int index) {
+    _cartItems.removeAt(index);
+    notifyListeners();
+  }
+
+  // Calculate total price
+  double calculateTotal() {
+  double totalPrice = 0;
+  for (int i = 0; i < _cartItems.length; i++) {
+    totalPrice += double.parse(_cartItems[i][1]);
+  }
+  return totalPrice;
+}
+
+  // Build method for GridView of burgers
+  Widget buildBurgerGrid() {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2, 
+        childAspectRatio: 1/1.5
+      ),
+      itemBuilder: (context, index) {
+        return BurgerTile(
+          burgerFlavor: _burgersOnSale[index][0],
+          burgerPrice: _burgersOnSale[index][1],
+          burgerColor: _burgersOnSale[index][2],
+          imageName: _burgersOnSale[index][3],
+          onPressed: () {
+            addItemToCart(index);
+          },
         );
-      }, // número de items que se mostrarán
-      itemCount: burgersOnSale.length,
-      ); // el gridDelgate, es como va organizado todo
+      },
+      itemCount: _burgersOnSale.length,
+    );
   }
 }

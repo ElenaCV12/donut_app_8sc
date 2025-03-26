@@ -17,15 +17,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Widget> myTabs = [
-    //donut tab
     const MyTab(iconPath: 'lib/icons/donut.png', tabName: 'Donuts'),
-    //burger tab
     const MyTab(iconPath: 'lib/icons/burger.png', tabName: 'Burger'),
-    //smoothie tab
     const MyTab(iconPath: 'lib/icons/smoothie.png', tabName: 'Smoothie'),
-    //pancakes tab
     const MyTab(iconPath: 'lib/icons/pancakes.png', tabName: 'Pancakes'),
-    //pizza tab
     const MyTab(iconPath: 'lib/icons/pizza.png', tabName: 'Pizza'),
   ];
 
@@ -42,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.only(right: 12.0),
               child: IconButton(
                 onPressed: () {}, 
-                icon: Icon(Icons.person)
+                icon: const Icon(Icons.person)
               ),
             )
           ],
@@ -64,33 +59,49 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            // Tab Bar for menu items
             TabBar(
               tabs: myTabs,
               labelColor: Colors.pink,
               unselectedLabelColor: Colors.grey,
             ),
-            // Tab Bar view
             Expanded(
               child: TabBarView(
                 children: [
-                  // Use Consumer for DonutTab
                   Consumer<DonutTab>(
-                    builder: (context, donutTab, child) {
-                      return donutTab.buildDonutGrid();
-                    },
+                    builder: (context, donutTab, child) => donutTab.buildDonutGrid(),
                   ),
-                  BurgerTab(),
-                  SmoothieTab(),
-                  PancakesTab(),
-                  PizzaTab(),
+                  Consumer<BurgerTab>(
+                    builder: (context, burgerTab, child) => burgerTab.buildBurgerGrid(),
+                  ),
+                  Consumer<SmoothieTab>(
+                    builder: (context, smoothieTab, child) => smoothieTab.buildSmoothieGrid(),
+                  ),
+                  Consumer<PancakesTab>(
+                    builder: (context, pancakesTab, child) => pancakesTab.buildPancakesGrid(),
+                  ),
+                  Consumer<PizzaTab>(
+                    builder: (context, pizzaTab, child) => pizzaTab.buildPizzaGrid(),
+                  ),
                 ]
               )
             ),
             
-            // Cart Section
-            Consumer<DonutTab>(
-              builder: (context, donutTab, child) {
+            // Cart Section con múltiples proveedores
+            Consumer5<DonutTab, BurgerTab, SmoothieTab, PancakesTab, PizzaTab>(
+              builder: (context, donutTab, burgerTab, smoothieTab, pancakesTab, pizzaTab, child) {
+                // Calculate total items and price
+                int totalItems = donutTab.cartItems.length +
+                     burgerTab.cartItems.length +
+                     smoothieTab.cartItems.length +
+                     pancakesTab.cartItems.length +
+                     pizzaTab.cartItems.length;
+    
+                double totalPrice = donutTab.calculateTotal() +
+                        burgerTab.calculateTotal() +
+                        smoothieTab.calculateTotal() +
+                        pancakesTab.calculateTotal() +
+                        pizzaTab.calculateTotal();
+                        
                 return Container(
                   color: Colors.white,
                   padding: const EdgeInsets.all(16),
@@ -103,8 +114,8 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "${donutTab.cartItems.length} Items | \$${donutTab.calculateTotal()}",
-                              style: TextStyle(
+                              "$totalItems Items | \$${totalPrice.toStringAsFixed(2)}",
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -138,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               },
-            )
+            ),
           ],
         ),
       ),

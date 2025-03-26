@@ -8,8 +8,9 @@ class PancakesTile extends StatelessWidget {
 
   //valor fijo del borde circular
   final double borderRadius = 24;
+  final void Function()? onPressed;
 
-  const PancakesTile({super.key, required this.pancakeFlavor, required this.pancakePrice, this.pancakeColor, required this.imageName});
+  const PancakesTile({super.key, required this.pancakeFlavor, required this.pancakePrice, this.pancakeColor, required this.imageName, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +105,7 @@ class PancakesTile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(borderRadius/2),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: onPressed,
                       child: const Text(
                         'Add',
                         style: TextStyle(

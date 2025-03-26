@@ -8,8 +8,9 @@ class SmoothieTile extends StatelessWidget {
 
   //valor fijo del borde circular
   final double borderRadius = 24;
+  final void Function()? onPressed;
 
-  const SmoothieTile({super.key, required this.smoothieFlavor, required this.smoothiePrice, this.smoothieColor, required this.imageName});
+  const SmoothieTile({super.key, required this.smoothieFlavor, required this.smoothiePrice, this.smoothieColor, required this.imageName, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +105,7 @@ class SmoothieTile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(borderRadius/2),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: onPressed,
                       child: const Text(
                         'Add',
                         style: TextStyle(
