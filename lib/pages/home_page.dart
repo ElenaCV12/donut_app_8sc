@@ -7,6 +7,9 @@ import 'package:donut_app_8sc/tabs/smoothie_tab.dart';
 import 'package:donut_app_8sc/utils/my_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:donut_app_8sc/auth/login_screen.dart'; // Asegúrate de que esta ruta sea correcta
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,6 +27,28 @@ class _HomePageState extends State<HomePage> {
     const MyTab(iconPath: 'lib/icons/pizza.png', tabName: 'Pizza'),
   ];
 
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      // Cerrar sesión en Firebase
+      await FirebaseAuth.instance.signOut();
+      
+      // Actualizar SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLoggedIn', false);
+      
+      // Navegar a la pantalla de inicio de sesión
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+        (Route<dynamic> route) => false,
+      );
+    } catch (e) {
+      print("Error al cerrar sesión: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al cerrar sesión. Inténtalo de nuevo.')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -35,9 +60,35 @@ class _HomePageState extends State<HomePage> {
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 12.0),
-              child: IconButton(
-                onPressed: () {}, 
-                icon: const Icon(Icons.person)
+              child: PopupMenuButton<String>(
+                icon: Icon(Icons.person, color: Colors.grey[800]),
+                onSelected: (value) async {
+                  if (value == 'logout') {
+                    await _signOut(context);
+                  }
+                },
+                itemBuilder: (BuildContext context) => [
+                  const PopupMenuItem<String>(
+                    value: 'profile',
+                    child: Row(
+                      children: [
+                        Icon(Icons.account_circle),
+                        SizedBox(width: 8),
+                        Text('Perfil'),
+                      ],
+                    ),
+                  ),
+                  const PopupMenuItem<String>(
+                    value: 'logout',
+                    child: Row(
+                      children: [
+                        Icon(Icons.logout),
+                        SizedBox(width: 8),
+                        Text('Cerrar sesión'),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             )
           ],

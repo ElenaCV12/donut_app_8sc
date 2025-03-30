@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "124648803991",
+    "project_id": "donut-app-b0f98",
+    "storage_bucket": "donut-app-b0f98.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124648803991:android:f24fd3dbb7679f2ba8a3d2",
+        "android_client_info": {
+          "package_name": "com.elenacv.donutappfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124648803991-1fu3g5q4aih54jh3pqj7mb0c4pibmrid.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.elenacv.donutappfirebase",
+            "certificate_hash": "ad8c67aca89aeba7e1f036ed62551f828f2fb97e"
+          }
+        },
+        {
+          "client_id": "124648803991-gk44q21ifuqpqg2945sich2vd5136tvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaEwBoHaWrZ6nRzZvu-TDJWzwPPm3SnBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124648803991-gk44q21ifuqpqg2945sich2vd5136tvk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "124648803991-2ko5etr44o6ik9ug0bb7odcvjasba2nc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.elenacv.donutappfirebase"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124648803991:android:99abf88ad6e9ffd8a8a3d2",
+        "android_client_info": {
+          "package_name": "com.example.donut_app_8sc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124648803991-gk44q21ifuqpqg2945sich2vd5136tvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaEwBoHaWrZ6nRzZvu-TDJWzwPPm3SnBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124648803991-gk44q21ifuqpqg2945sich2vd5136tvk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "124648803991-2ko5etr44o6ik9ug0bb7odcvjasba2nc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.elenacv.donutappfirebase"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
